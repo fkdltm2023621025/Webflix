@@ -93,5 +93,45 @@ public class UserDAO {
     }
 
     
+//운영자 목록 가져오기
+	public List<UserDTO> getAdmins() throws SQLException {
+		String query = "SELECT * FROM user WHERE role = 'admin'";
+		try (PreparedStatement pstmt = con.prepareStatement(query); ResultSet rs = pstmt.executeQuery()) {
+			List<UserDTO> admins = new ArrayList<>();
+			while (rs.next()) {
+				UserDTO user = new UserDTO();
+				user.setName(rs.getString("name"));
+				user.setBirthDate(rs.getString("birthDate"));
+				user.setGender(rs.getString("gender"));
+				user.setNickname(rs.getString("nickname"));
+				user.setUserId(rs.getString("userId"));
+				user.setPassword(rs.getString("password"));
+				user.setPhoneNumber(rs.getString("phoneNumber"));
+				user.setEmail(rs.getString("email"));
+				admins.add(user);
+			}
+			return admins;
+		}
+	}
 
+// 이용자 목록 가져오기
+	public List<UserDTO> getUsers() throws SQLException {
+		String query = "SELECT * FROM user WHERE role = 'user'";
+		try (PreparedStatement pstmt = con.prepareStatement(query); ResultSet rs = pstmt.executeQuery()) {
+			List<UserDTO> users = new ArrayList<>();
+			while (rs.next()) {
+				UserDTO user = new UserDTO();
+				user.setName(rs.getString("name"));
+				user.setBirthDate(rs.getString("birthDate"));
+				user.setGender(rs.getString("gender"));
+				user.setNickname(rs.getString("nickname"));
+				user.setUserId(rs.getString("userId"));
+				user.setPassword(rs.getString("password"));
+				user.setPhoneNumber(rs.getString("phoneNumber"));
+				user.setEmail(rs.getString("email"));
+				users.add(user);
+			}
+			return users;
+		}
+	}
 }
